@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25a9d3174a9c04a0f942495e9d064dd7, type: 3}
+  m_Name: Frog
+  m_EditorClassIdentifier: TastyZoo::TastyZoo.Animals.AnimalConfig
+  _prefab: {fileID: 406503671997638967, guid: 5bd2f64783fa346a3a86fd723b73a6d1, type: 3}
+  _role: {fileID: 11400000, guid: 25033f9375cbb4de7a5440f74bebd53c, type: 2}
+  _foodGroup: {fileID: 11400000, guid: 0fd12fbb7acde448284acac8b02d567b, type: 2}
+  _movement: {fileID: 11400000, guid: 8e2c1a6c655d543038b62880c46bba27, type: 2}
+  _behaviour: {fileID: 11400000, guid: 605ecd5defbfa454394a4c9bf76be6ab, type: 2}

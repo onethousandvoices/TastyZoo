@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25a9d3174a9c04a0f942495e9d064dd7, type: 3}
+  m_Name: Snake
+  m_EditorClassIdentifier: TastyZoo::TastyZoo.Animals.AnimalConfig
+  _prefab: {fileID: 8394676516238806781, guid: 42fe7076896df425ab1da22e71e16c3a, type: 3}
+  _role: {fileID: 11400000, guid: 948bb6cc7d8164b08acb125937de1b5c, type: 2}
+  _foodGroup: {fileID: 11400000, guid: 6f521d33343cb4b21aa43c2bbd763bbf, type: 2}
+  _movement: {fileID: 11400000, guid: eb90b0f36917e4827a994d0a7b37f443, type: 2}
+  _behaviour: {fileID: 11400000, guid: 96eb705cc39b44f41aed9b8be537d516, type: 2}
