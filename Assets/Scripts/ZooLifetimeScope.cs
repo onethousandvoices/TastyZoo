@@ -27,7 +27,7 @@ namespace TastyZoo
             builder.RegisterInstance(_camera);
             builder.RegisterInstance(_spawnConfig);
             builder.RegisterComponent(_deathCounter);
-            builder.Register<ArenaBounds>(Lifetime.Singleton).WithParameter("margin", _arenaMargin);
+            builder.RegisterInstance(new ArenaBounds(_camera, _arenaMargin));
             builder.Register<AnimalFactory>(Lifetime.Singleton).WithParameter(_animalsRoot);
 
             builder.RegisterEntryPoint<AnimalsController>().AsSelf();

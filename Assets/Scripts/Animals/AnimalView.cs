@@ -89,12 +89,8 @@ namespace TastyZoo.Animals
                 .OnComplete(disappeared.Invoke);
         }
 
-        public void BounceOff(Vector3 point)
-        {
-            var away = _body.position - point;
-            away.y = 0f;
-            _body.AddForce(away.normalized * _bounceImpulse + Vector3.up * _bounceLift, ForceMode.VelocityChange);
-        }
+        public void Push(Vector3 direction)
+            => _body.AddForce(direction * _bounceImpulse + Vector3.up * _bounceLift, ForceMode.VelocityChange);
 
         private void ReportWall(Collision collision)
         {

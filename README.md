@@ -2,6 +2,8 @@
 
 A Unity 6 top-down zoo simulation where animals spawn on a meadow, wander around, collide by physics and follow a data-driven food chain.
 
+![Tasty Zoo](Docs/Screenshots/gameplay_1.png)
+
 ## Overview
 
 Every 1-2 seconds a random animal appears at a free spot of the visible arena and starts wandering: it picks a random heading and periodically turns by a random angle. Frogs jump a fixed distance on a fixed interval, snakes crawl at a fixed speed. When an animal heads out of the screen it turns back towards a random point inside the arena (the turn starts a small margin before the edge, so animals never vanish), and log walls in the middle of the meadow reflect animals like a mirror.
@@ -18,8 +20,8 @@ Animals interact on collision. Two prey bounce apart, a predator eats anything i
 - **Screen bounds** - the arena is the camera frustum projected on the ground, inset by a margin, and follows resolution changes
 - **Decoupled events** - `AnimalEaten` carries only the eaten role and the meal position, UI subscribes through MessagePipe without touching animals
 - **Object pooling** - animals and labels are recycled with `UnityEngine.Pool.ObjectPool`
-- **uGUI** - one counter row per role generated from the spawn config, "Tasty!" labels pinned to the meal point
-- **EditMode tests** - food chain rules and jump math are covered by NUnit tests
+- **uGUI** - one counter row per role generated from the spawn config, "Tasty!" labels pinned to the meal point with a punch-in scale while floating up, stacked when meals overlap; the font atlas is static, so no glyphs are rasterized at runtime
+- **EditMode tests** - food chain rules, jump math and heading reflection are covered by NUnit tests
 
 ## Tech Stack
 
@@ -29,7 +31,7 @@ Animals interact on collision. Two prey bounce apart, a predator eats anything i
 | Universal Render Pipeline | Rendering |
 | VContainer 1.19.0 | Dependency injection and entry points |
 | MessagePipe 1.8.2 | In-process pub/sub |
-| UniTask 2.5.10 | Required by MessagePipe, not used by game code (async uses `Awaitable`) |
+| UniTask 2.5.10 | Required by MessagePipe, not used by game code |
 | C# 10 (`Assets/csc.rsp`) | `readonly record struct` for messages and value data |
 | DOTween | Spawn, death, counter and label animations |
 | uGUI + TextMesh Pro | Counter and "Tasty!" labels |
@@ -62,7 +64,7 @@ Assets/Scripts
 |       +-- CrawlMovement(Config).cs
 +-- Spawning
 |   +-- SpawnConfig.cs
-|   +-- SpawnController.cs       (Awaitable loop, waits for a free spot)
+|   +-- SpawnController.cs       (fixed tick timer, retries until a free spot)
 +-- World
 |   +-- ArenaBounds.cs
 +-- UI
@@ -80,7 +82,7 @@ Assets/Tests/EditMode
 Runtime flow:
 
 1. `ZooLifetimeScope` registers configs, services and entry points.
-2. `SpawnController` waits a random delay and spawns a random `AnimalConfig` at the first free point of `ArenaBounds`.
+2. `SpawnController` counts down a random 1-2 s delay in `FixedTick` and spawns a random `AnimalConfig` at a free point of `ArenaBounds`, retrying every tick until one is found.
 3. `AnimalsController` ticks every animal in `FixedTick`; the behaviour steers the heading, the animal turns back when heading out of `ArenaBounds`, and the movement drives the body.
 4. `AnimalView` reports collisions. A wall hit reflects the heading, an animal hit asks `FoodChain` for the eater; the eater plays its attack, the food is pulled in and returned to the pool, and `AnimalEaten` is published.
 5. `DeathCounterController` and `TastyLabelsController` react to `AnimalEaten`.

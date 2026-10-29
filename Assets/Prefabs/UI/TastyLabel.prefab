@@ -150,9 +150,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ee5e488c1da84718819e7ac379b5ccf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: TastyZoo::TastyZoo.UI.TastyLabelView
+  _rect: {fileID: 3242856683320097919}
   _text: {fileID: 853075189396091910}
   _offset: {x: 0, y: -70}
-  _riseHeight: 40
-  _appearDuration: 0.25
+  _appearDuration: 0.3
   _holdDuration: 0.5
   _fadeDuration: 0.3
+  _riseHeight: 40
+  _fadeRise: 30

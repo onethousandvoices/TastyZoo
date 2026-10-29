@@ -42,8 +42,9 @@ namespace TastyZoo.Animals
         {
             var away = Position - point;
             away.y = 0f;
-            View.BounceOff(point);
-            Reflect(away.normalized);
+            away.Normalize();
+            View.Push(away);
+            Reflect(away);
         }
 
         public void Reflect(Vector3 normal)
